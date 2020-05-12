@@ -8,8 +8,6 @@ import "react-table-6/react-table.css";
 
 import FoldableTableHOC from "react-table-6/lib/hoc/foldableTable";
 
-import { CSVLink, CSVDownload } from "react-csv";
-
 const FoldableTable = FoldableTableHOC(ReactTable);
 
 const Wrapper = styled.div`
@@ -27,7 +25,7 @@ const Delete = styled.div`
 `;
 
 class UpdatePickTransactions extends Component {
-  updateUser = event => {
+  updateUser = (event) => {
     event.preventDefault();
 
     window.location.href = `/picktransactions/update/${this.props.id}`;
@@ -39,7 +37,7 @@ class UpdatePickTransactions extends Component {
 }
 
 class DeletePickTransactions extends Component {
-  deleteUser = event => {
+  deleteUser = (event) => {
     event.preventDefault();
 
     if (
@@ -63,17 +61,17 @@ class PickTransactionsList extends Component {
     this.state = {
       stocks: [],
       columns: [],
-      isLoading: false
+      isLoading: false,
     };
   }
 
   componentDidMount = async () => {
     this.setState({ isLoading: true });
 
-    await api.getAllPickTransactions().then(stocks => {
+    await api.getAllPickTransactions().then((stocks) => {
       this.setState({
         stocks: stocks.data.data,
-        isLoading: false
+        isLoading: false,
       });
     });
   };
@@ -86,84 +84,84 @@ class PickTransactionsList extends Component {
       {
         Header: "Lot #",
         accessor: "STK",
-        filterable: true
+        filterable: true,
       },
       {
         Header: "Portfolio",
         accessor: "PORT",
-        filterable: true
+        filterable: true,
       },
       {
         Header: "Symbol",
         accessor: "SYM",
-        filterable: true
+        filterable: true,
       },
       {
         Header: "Date",
         accessor: "DATE",
         maxWidth: 135,
-        filterable: true
+        filterable: true,
       },
       {
         Header: "No of Shares",
         accessor: "SHARES",
-        filterable: true
+        filterable: true,
       },
       {
         Header: "Cost Per Share",
         accessor: "COST_PER_SHARE",
-        Cell: row => <span>$ {row.value}</span>,
+        Cell: (row) => <span>$ {row.value}</span>,
         filterable: true,
-        foldable: true
+        foldable: true,
       },
       {
         Header: "Total Cost",
         accessor: "TOT_COST",
-        Cell: row => <span>$ {row.value}</span>,
+        Cell: (row) => <span>$ {row.value}</span>,
         filterable: true,
-        foldable: true
+        foldable: true,
       },
 
       {
         Header: "Current Price",
         accessor: "PRICE",
-        Cell: row => <span>$ {row.value}</span>,
+        Cell: (row) => <span>$ {row.value}</span>,
         filterable: true,
-        foldable: true
+        foldable: true,
       },
       {
         Header: "Current Value",
         accessor: "VALUE",
-        Cell: row => <span>$ {row.value}</span>,
+        Cell: (row) => <span>$ {row.value}</span>,
         filterable: true,
-        foldable: true
+        foldable: true,
       },
       {
         Header: "TYPE",
         accessor: "TYPE",
         filterable: true,
-        foldable: true
+        foldable: true,
       },
       {
         Header: "Gain/Loss",
         accessor: "REALIZED_GAIN_LOSS",
-        Cell: row => <span>$ {row.value}</span>,
+        Cell: (row) => <span>$ {row.value}</span>,
         filterable: true,
-        foldable: true
+        foldable: true,
       },
 
       {
         Header: "Net Proceeds",
         accessor: "NET_PROCEEDS",
-        Cell: row => <span>$ {row.value}</span>,
+        Cell: (row) => <span>$ {row.value}</span>,
         filterable: true,
-        foldable: true
+        foldable: true,
       },
 
       {
         Header: "Broker",
         accessor: "BROKER",
-        filterable: true
+        filterable: true,
       },
 
       {
@@ -171,27 +169,27 @@ class PickTransactionsList extends Component {
         accessor: "",
         foldable: true,
         maxWidth: 100,
-        Cell: function(props) {
+        Cell: function (props) {
           return (
             <span>
               <DeletePickTransactions id={props.original._id} />
             </span>
           );
-        }
+        },
       },
       {
         Header: "",
         accessor: "",
         foldable: true,
         maxWidth: 100,
-        Cell: function(props) {
+        Cell: function (props) {
           return (
             <span>
               <UpdatePickTransactions id={props.original._id} />
             </span>
           );
-        }
-      }
+        },
+      },
     ];
 
     let showTable = true;
@@ -203,7 +201,7 @@ class PickTransactionsList extends Component {
       <Wrapper>
         {showTable && (
           <FoldableTable
-            ref={r => {
+            ref={(r) => {
               this.reactTable = r;
             }}
             data={stocks}
@@ -213,7 +211,7 @@ class PickTransactionsList extends Component {
             showPageSizeOptions={true}
             minRows={0}
             style={{
-              height: "800px"
+              height: "800px",
             }}
           />
         )}
